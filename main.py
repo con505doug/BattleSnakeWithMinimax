@@ -15,6 +15,7 @@ import typing
 import snake
 import board
 from minimax import *
+import time
 
 
 # info is called when you create your Battlesnake on play.battlesnake.com
@@ -46,7 +47,7 @@ def end(game_state: typing.Dict):
 # Valid moves are "up", "down", "left", or "right"
 # See https://docs.battlesnake.com/api/example-move for available data
 def move(game_state: typing.Dict) -> typing.Dict:
-
+    t0 = time.perf_counter()
     is_move_safe = {
       "up": True, 
       "down": True, 
@@ -55,7 +56,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
     }
 
     moves = ["up", "down", "left", "right"]
-
     my_snake = snake.snake(game_state["you"]["head"], game_state["you"]["body"], game_state["you"]["health"], game_state["you"]["length"])
 
     if len(game_state["board"]["snakes"]) == 1:
@@ -66,7 +66,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
         opp_snake = snake.snake(against["head"], against["body"], against["health"], against["length"])
 
     my_board = board.board(game_state["board"]["height"], game_state["board"]["width"], my_snake, opp_snake, game_state["board"]["food"])      
-    score = eval_function(my_board)
+    #score = eval_function(my_board)
     #print(score)
 
     
@@ -74,7 +74,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     #print("Head Actual: ", game_state["you"]["head"])
     #print("Opp Head Actual: ", opp_snake.head)
-    value, best_move = minimax(my_board, 4, True)
+    value, best_move = minimax(my_board, 6, True)
     if best_move == None:
       safe_moves, safe_coords = my_snake.get_safe_moves(moves, my_board.height,my_board.width, opp_snake)
       if len(safe_moves) == 0:
@@ -83,6 +83,9 @@ def move(game_state: typing.Dict) -> typing.Dict:
         best_move = random.choice(safe_moves)
 
     print(f"MOVE {game_state['turn']}: {best_move}")
+    t1 = time.perf_counter()
+    elapsed = t1 - t0
+    print(elapsed)
     return {"move": best_move}
 
 

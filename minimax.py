@@ -35,7 +35,7 @@ def eval_function(my_board):
     attack_weight = 0
   elif enemy_close and not need_food:
     food_weight = 5
-    safety_weight = 35
+    safety_weight = 70
     attack_weight = 100
   elif not enemy_close and need_food:
     food_weight = 100
@@ -48,8 +48,10 @@ def eval_function(my_board):
 
 
   closest_food, food_distance = my_board.my_snake.get_closest_food(my_board.food)
-  if my_board.my_snake.head == closest_food:
-    food_distance = .8
+  if closest_food == None:
+    food_weight = 0
+  elif my_board.my_snake.head == closest_food:
+    food_distance = .5
     
   enemy_distance = abs(my_board.my_snake.head["x"] - my_board.opp_snake.head["x"]) + abs(my_board.my_snake.head["y"] - my_board.opp_snake.head["y"])
 
@@ -65,18 +67,19 @@ def minimax(my_board, depth, maximizing_player):
     return eval_function(my_board)
 
   if maximizing_player:
-    print("OK")
     value = -math.inf
     best_move = None
     my_moves, my_move_coords = my_board.my_snake.get_safe_moves(my_board.moves, my_board.height, my_board.width, my_board.opp_snake)
     
-    for move in my_moves:
+    for move, move_coords in zip(my_moves, my_move_coords):
       future_board = copy.deepcopy(my_board)
-      if move in my_board.food:
-        future_board.food.remove(move)
+      print("in max: ", move_coords)
+      print(my_board.food)
+      if move_coords in my_board.food:
+        future_board.food.remove(move_coords)
         future_board.my_snake.move(move, True)
-        future_board.eaten_food.append(move)
-        future_board.my_snake.eaten_food.append(move)
+        future_board.eaten_food.append(move_coords)
+        future_board.my_snake.eaten_food.append(move_coords)
       else:
         future_board.my_snake.move(move, False)
 
@@ -94,13 +97,13 @@ def minimax(my_board, depth, maximizing_player):
     best_move = None
     opp_moves, opp_move_coords = my_board.opp_snake.get_safe_moves(my_board.moves, my_board.height, my_board.width, my_board.my_snake)
 
-    for move in opp_moves:
+    for move, move_coords in zip(opp_moves, opp_move_coords):
       future_board = copy.deepcopy(my_board)
       if move in my_board.food:
-        future_board.food.remove(move)
+        future_board.food.remove(move_coords)
         future_board.opp_snake.move(move, True)
-        future_board.eaten_food.append(move)
-        future_board.opp_snake.eaten_food.append(move)
+        future_board.eaten_food.append(move_coords)
+        future_board.opp_snake.eaten_food.append(move_coords)
       else:
         future_board.opp_snake.move(move, False)
         

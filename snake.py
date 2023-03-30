@@ -8,6 +8,7 @@ class snake:
 
 
   def get_closest_food(self, all_food):
+    closest_food = None
     food_distance = 10000
     for food in all_food:
       x_distance = abs(self.head["x"] - food["x"])
@@ -35,7 +36,7 @@ class snake:
     safe_coords = []
     for move in possible_moves:
       move_coords = self.get_move_coords(move)
-      if move_coords in self.body[:-1] or move_coords in self.body and self.length == 3:
+      if move_coords in self.body[:-1]:
         continue
       if move_coords["x"] == board_width or move_coords["x"] < 0:
         continue
