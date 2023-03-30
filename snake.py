@@ -1,10 +1,10 @@
 class snake:
-  def __init__(self, head, body, health, length):
+  def __init__(self, head, body, health, length, eaten_food=[]):
     self.head = head
     self.body = body
     self.health = health
     self.length = length
-    self.eaten_food = []
+    self.eaten_food = eaten_food
 
 
   def get_closest_food(self, all_food):

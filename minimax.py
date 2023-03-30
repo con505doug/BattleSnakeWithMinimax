@@ -1,5 +1,7 @@
 import math
 import copy
+import board
+import snake
 
 def eval_function(my_board):
   my_moves, my_move_coords = my_board.my_snake.get_safe_moves(my_board.moves, my_board.height, my_board.width, my_board.opp_snake)
@@ -72,7 +74,8 @@ def minimax(my_board, depth, maximizing_player):
     my_moves, my_move_coords = my_board.my_snake.get_safe_moves(my_board.moves, my_board.height, my_board.width, my_board.opp_snake)
     
     for move, move_coords in zip(my_moves, my_move_coords):
-      future_board = copy.deepcopy(my_board)
+      #future_board = copy.deepcopy(my_board)
+      future_board = board.board(my_board.height, my_board.width, snake.snake(my_board.my_snake.head, my_board.my_snake.body.copy(), my_board.my_snake.health, my_board.my_snake.length, my_board.my_snake.eaten_food.copy()), snake.snake(my_board.opp_snake.head, my_board.opp_snake.body.copy(), my_board.opp_snake.health, my_board.opp_snake.length, my_board.opp_snake.eaten_food.copy()), my_board.food.copy(), my_board.eaten_food.copy())
       print("in max: ", move_coords)
       print(my_board.food)
       if move_coords in my_board.food:
@@ -98,7 +101,8 @@ def minimax(my_board, depth, maximizing_player):
     opp_moves, opp_move_coords = my_board.opp_snake.get_safe_moves(my_board.moves, my_board.height, my_board.width, my_board.my_snake)
 
     for move, move_coords in zip(opp_moves, opp_move_coords):
-      future_board = copy.deepcopy(my_board)
+      #future_board = copy.deepcopy(my_board)
+      future_board = board.board(my_board.height, my_board.width, snake.snake(my_board.my_snake.head, my_board.my_snake.body.copy(), my_board.my_snake.health, my_board.my_snake.length, my_board.my_snake.eaten_food.copy()), snake.snake(my_board.opp_snake.head, my_board.opp_snake.body.copy(), my_board.opp_snake.health, my_board.opp_snake.length, my_board.opp_snake.eaten_food.copy()), my_board.food.copy(), my_board.eaten_food.copy())
       if move in my_board.food:
         future_board.food.remove(move_coords)
         future_board.opp_snake.move(move, True)
