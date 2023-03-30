@@ -92,10 +92,5 @@ def move(game_state: typing.Dict) -> typing.Dict:
 # Start server when `python main.py` is run
 if __name__ == "__main__":
     from server import run_server
-
-    run_server({
-        "info": info, 
-        "start": start, 
-         "move": move, 
-        "end": end
-    })
+    gamestate = {"you":{"latency":"17.934","id":"ef8ca03f-fab5-4498-9163-2a7d43c0ac85","health":89,"length":9,"shout":"","head":{"y":3,"x":10},"customizations":{"color":"#66ff33","tail":"default","head":"default"},"body":[{"y":3,"x":10},{"y":4,"x":10},{"y":4,"x":9},{"y":4,"x":8},{"y":5,"x":8},{"y":5,"x":7},{"y":5,"x":6},{"y":6,"x":6},{"y":6,"x":5}],"name":"Snek","squad":""},"turn":87,"board":{"snakes":[{"latency":"0.0069125999871176","id":"5679bee1-530c-4fe2-9801-06c14e39ae9f","health":85,"length":6,"shout":"","head":{"y":1,"x":10},"customizations":{"color":"#ffffff","tail":"alligator","head":"all-seeing"},"body":[{"y":1,"x":10},{"y":2,"x":10},{"y":2,"x":9},{"y":2,"x":8},{"y":3,"x":8},{"y":3,"x":7}],"name":"Bot","squad":""},{"latency":"17.934","id":"ef8ca03f-fab5-4498-9163-2a7d43c0ac85","health":89,"length":9,"shout":"","head":{"y":3,"x":10},"customizations":{"color":"#66ff33","tail":"default","head":"default"},"body":[{"y":3,"x":10},{"y":4,"x":10},{"y":4,"x":9},{"y":4,"x":8},{"y":5,"x":8},{"y":5,"x":7},{"y":5,"x":6},{"y":6,"x":6},{"y":6,"x":5}],"name":"Snek","squad":""}],"width":11,"hazards":[],"height":11,"food":[{"y":1,"x":9},{"y":2,"x":3},{"y":0,"x":7},{"y":4,"x":0},{"y":10,"x":8},{"y":9,"x":8}]},"game":{"source":"custom","ruleset":{"version":"Mojave/3.5.2","name":"standard","settings":{"hazardDamagePerTurn":14,"royale":{"shrinkEveryNTurns":25},"squad":{"sharedHealth": True,"sharedLength": True,"allowBodyCollisions": True,"sharedElimination": True},"minimumFood":1,"foodSpawnChance":15}},"timeout":500,"id":"cca5682d-acb1-477e-9b5e-54451bedb5ba"}}
+    print(move(gamestate))
