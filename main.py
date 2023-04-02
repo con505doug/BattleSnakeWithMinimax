@@ -74,6 +74,17 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     #print("Head Actual: ", game_state["you"]["head"])
     #print("Opp Head Actual: ", opp_snake.head)
+    print("Orig Head: ", my_snake.head)
+    print("Orig Body: ", my_snake.body)
+    my_snake.move("down", False)
+    print("Next Head: ", my_snake.head)
+    print("Next Body: ", my_snake.body)
+    my_snake.undo_move()
+    print("After Head: ", my_snake.head)
+    print("After Body: ", my_snake.body)
+
+
+
     value, best_move = minimax(my_board, 6, True)
     if best_move == None:
       safe_moves, safe_coords = my_snake.get_safe_moves(moves, my_board.height,my_board.width, opp_snake)

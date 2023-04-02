@@ -5,6 +5,8 @@ class snake:
     self.health = health
     self.length = length
     self.eaten_food = eaten_food
+    self.previous_tail = []
+    self.ate_food = []
 
 
   def get_closest_food(self, all_food):
@@ -56,4 +58,12 @@ class snake:
       
     return
     
-    
+  def undo_move(self):
+    self.head = self.body[1]
+    self.body.pop(0)
+    self.body.append(self.previous_tail.pop())
+    if self.ate_food.pop() == True:
+      self.body.pop()
+      self.length = self.length - 1
+
+    return
