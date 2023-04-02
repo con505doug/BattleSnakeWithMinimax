@@ -44,7 +44,8 @@ class snake:
         continue
       if move_coords["y"] == board_height or move_coords["y"] < 0:
         continue
-      if move_coords in enemy_snake.body[1:-1]:
+      test = enemy_snake.body[:-1]
+      if move_coords in enemy_snake.body[:-1]:
         continue
       safe_moves.append(move)
       safe_coords.append(move_coords)
