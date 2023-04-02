@@ -57,7 +57,7 @@ class snake:
       self.previous_tail.append(self.body.pop())
       self.ate_food.append(False)
     else:
-      self.previous_tail.append(self.previous_tail[-1])
+      self.previous_tail.append(self.body[-1])
       self.length = self.length + 1
       self.ate_food.append(True)
       

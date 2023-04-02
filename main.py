@@ -68,13 +68,13 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     #print("Head Actual: ", game_state["you"]["head"])
     #print("Opp Head Actual: ", opp_snake.head)
-    value, best_move = minimax(my_board, 10, -math.inf, math.inf, True, t0)
+    value, best_move = minimax(my_board, 20, -math.inf, math.inf, True, t0)
     if best_move == None:
       safe_moves, safe_coords = my_snake.get_safe_moves(moves, my_board.height,my_board.width, opp_snake)
       if len(safe_moves) == 0:
         print(f"MOVE {game_state['turn']}: No safe moves detected! Moving down")
         return {"move": "down"}
-      best_move = random.choice(safe_moves)
+        best_move = random.choice(safe_moves)
 
     print(f"MOVE {game_state['turn']}: {best_move}\n")
     t1 = time.perf_counter()
