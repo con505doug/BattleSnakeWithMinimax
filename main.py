@@ -76,7 +76,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     #print("Opp Head Actual: ", opp_snake.head)
     print("Orig Head: ", my_snake.head)
     print("Orig Body: ", my_snake.body)
-    my_snake.move("down", False)
+    my_snake.move("down", True)
     print("Next Head: ", my_snake.head)
     print("Next Body: ", my_snake.body)
     my_snake.undo_move()
