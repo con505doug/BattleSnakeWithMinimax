@@ -91,6 +91,7 @@ def minimax(my_board, depth, alpha, beta, maximizing_player, t0):
       #print("in max: ", move_coords)copy.deepcopy(my_board.my_snake)
       #print(my_board.food)
       if move_coords in my_board.food:
+        ate_food = move_coords
         future_board.food.remove(move_coords)
         future_board.my_snake.move(move, True)
         future_board.eaten_food.append(move_coords)
