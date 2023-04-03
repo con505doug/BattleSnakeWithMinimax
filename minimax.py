@@ -39,7 +39,7 @@ def eval_function(my_board):
   elif enemy_close and not need_food:
     food_weight = 5
     safety_weight = 70
-    attack_weight = 100
+    attack_weight = 70
   elif not enemy_close and need_food:
     food_weight = 100
     safety_weight = 30
@@ -56,7 +56,6 @@ def eval_function(my_board):
   elif my_board.my_snake.head == closest_food:
     food_distance = .5
     
-  enemy_distance = abs(my_board.my_snake.head["x"] - my_board.opp_snake.head["x"]) + abs(my_board.my_snake.head["y"] - my_board.opp_snake.head["y"])
 
   #print("Food eaten: " , len(my_board.my_snake.eaten_food))
   score = (len(my_board.my_snake.eaten_food) + 1) * (len(my_moves) * safety_weight + (3 / food_distance) * food_weight + (3 / enemy_distance) * attack_weight)
@@ -66,12 +65,12 @@ def eval_function(my_board):
   return score, None
 
 def minimax(my_board, depth, alpha, beta, maximizing_player, t0):
-  t1 = time.perf_counter()
+  '''t1 = time.perf_counter()
   total_time = t1 - t0
   if total_time > .400 and depth%2 == 0:
     print(total_time)
     print(depth)
-    depth = 0
+    depth = 0'''
 
   if depth == 0 or my_board.is_over:
     return eval_function(my_board)
