@@ -12,6 +12,8 @@ def eval_function(my_board):
   need_food = False
   avoid_edges = False
   edge_modifer = 0
+  trap_modifier = 0
+
   if my_board.out_of_time:
     return None, None, my_board.out_of_time
   #print("Head: ", my_board.my_snake.head)
@@ -63,10 +65,24 @@ def eval_function(my_board):
   bottom_wall_dist = my_board.my_snake.head['y']
   top_wall_dist = my_board.height - my_board.my_snake.head['y'] - 1
 
+  my_width_edge = min(left_wall_dist, right_wall_dist)
+  my_height_edge = min(bottom_wall_dist, top_wall_dist)
+
+  edge_score = my_width_edge + my_height_edge
+
+  left_wall_dist = my_board.opp_snake.head['x']
+  right_wall_dist = my_board.width - my_board.opp_snake.head['x']  - 1
+  bottom_wall_dist = my_board.opp_snake.head['y']
+  top_wall_dist = my_board.height - my_board.opp_snake.head['y'] - 1
+
   width_edge = min(left_wall_dist, right_wall_dist)
   height_edge = min(bottom_wall_dist, top_wall_dist)
 
-  edge_score = width_edge + height_edge
+  if (width_edge == my_width_edge - 1 or height_edge == my_height_edge - 1) and enemy_close:
+    safety_weight = safety_weight + 100
+
+  if (width_edge == 0 or height_edge == 0) and enemy_close:
+    trap_modifier = 100 / enemy_distance
 
   closest_food, food_distance = my_board.my_snake.get_closest_food(my_board.food)
   if closest_food == None:
@@ -74,9 +90,10 @@ def eval_function(my_board):
   elif my_board.my_snake.head == closest_food:
     food_distance = .5
     
+  
 
   #print("Food eaten: " , len(my_board.my_snake.eaten_food))
-  score = snake_length_modifer * (len(my_moves) * safety_weight + (3 / food_distance) * food_weight + (3 / enemy_distance) * attack_weight + safety_weight * edge_score)
+  score = snake_length_modifer * (len(my_moves) * safety_weight + (3 / food_distance) * food_weight + (3 / enemy_distance) * attack_weight + safety_weight * edge_score + attack_weight * trap_modifier)
   #print("Food: ", food_distance)
   #print(score)
 
@@ -85,7 +102,7 @@ def eval_function(my_board):
 def minimax(my_board, depth, alpha, beta, maximizing_player, t0):
   t1 = time.perf_counter()
   total_time = t1 - t0
-  if total_time > .400:
+  if total_time > .450:
     depth = 0
     my_board.out_of_time = True
 

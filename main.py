@@ -72,7 +72,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     #print("Head Actual: ", game_state["you"]["head"])
     #print("Opp Head Actual: ", opp_snake.head)
     depth = 4
-    while (t1 - t0) < .400:
+    while (t1 - t0) < .450:
         value, temp_move, out_of_time = minimax(my_board, depth, -math.inf, math.inf, True, t0)
         if not out_of_time:
             depth = depth + 4
