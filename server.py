@@ -1,6 +1,7 @@
 import logging
 import os
 import typing
+import sys
 
 from flask import Flask
 from flask import request
@@ -36,9 +37,14 @@ def run_server(handlers: typing.Dict):
             "server", "battlesnake/replit/starter-snake-python"
         )
         return response
-
+    
     host = "0.0.0.0"
-    port = int(os.environ.get("PORT", "8000"))
+
+    try:
+        port = sys.argv[2]
+    
+    except IndexError:
+        port = int(os.environ.get("PORT", "8000"))
 
     logging.getLogger("werkzeug").setLevel(logging.ERROR)
 

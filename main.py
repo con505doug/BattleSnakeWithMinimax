@@ -15,6 +15,8 @@ import typing
 import snake
 import board
 from minimax import *
+import math
+#import minimax
 import time
 
 
@@ -48,12 +50,7 @@ def end(game_state: typing.Dict):
 # See https://docs.battlesnake.com/api/example-move for available data
 def move(game_state: typing.Dict) -> typing.Dict:
     t0 = time.perf_counter()
-    is_move_safe = {
-      "up": True, 
-      "down": True, 
-      "left": True, 
-      "right": True
-    }
+    t1 = 0
 
     moves = ["up", "down", "left", "right"]
     my_snake = snake.snake(game_state["you"]["head"], game_state["you"]["body"], game_state["you"]["health"], game_state["you"]["length"])
@@ -74,15 +71,23 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     #print("Head Actual: ", game_state["you"]["head"])
     #print("Opp Head Actual: ", opp_snake.head)
-    value, best_move = minimax(my_board, 6, True)
+    depth = 2
+    while (t1 - t0) < .460:
+        value, temp_move, out_of_time = minimax(my_board, depth, -math.inf, math.inf, True, t0)
+        print(out_of_time)
+        if not out_of_time:
+            depth = depth + 4
+            best_move = temp_move
+        t1 = time.perf_counter()
+
     if best_move == None:
       safe_moves, safe_coords = my_snake.get_safe_moves(moves, my_board.height,my_board.width, opp_snake)
       if len(safe_moves) == 0:
         print(f"MOVE {game_state['turn']}: No safe moves detected! Moving down")
         return {"move": "down"}
-        best_move = random.choice(safe_moves)
+      best_move = random.choice(safe_moves)
 
-    print(f"MOVE {game_state['turn']}: {best_move}")
+    print(f"MOVE {game_state['turn']}: {best_move}\n")
     t1 = time.perf_counter()
     elapsed = t1 - t0
     print(elapsed)

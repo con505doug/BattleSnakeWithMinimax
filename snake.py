@@ -1,10 +1,12 @@
 class snake:
-  def __init__(self, head, body, health, length):
+  def __init__(self, head, body, health, length, eaten_food=[]):
     self.head = head
     self.body = body
     self.health = health
     self.length = length
     self.eaten_food = []
+    self.previous_tail = []
+    self.ate_food = []
 
 
   def get_closest_food(self, all_food):
@@ -52,8 +54,22 @@ class snake:
     self.head = self.get_move_coords(move)
     self.body.insert(0, self.head)
     if not eats_food:
-      self.body.pop()
+      self.previous_tail.append(self.body.pop())
+      self.ate_food.append(False)
+    else:
+      self.previous_tail.append(self.body.pop())
+      self.body.append(self.body[-1])
+      self.length = self.length + 1
+      self.ate_food.append(True)
       
     return
     
-    
+  def undo_move(self):
+    self.head = self.body[1]
+    self.body.pop(0)
+    if self.ate_food.pop() == True:
+      self.body.pop()
+      self.length = self.length - 1
+    self.body.append(self.previous_tail.pop())
+
+    return 
