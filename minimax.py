@@ -37,7 +37,14 @@ def eval_function(my_board):
     enemy_close = True
     avoid_edges = True
 
-  if my_board.my_snake.health < 50 or len(my_board.my_snake.body) <= len(my_board.opp_snake.body) + 3:
+  if len(my_board.my_snake.body) <= 10:
+    length_adder = 3
+  elif len(my_board.my_snake.body) <= 20:
+    length_adder = 2
+  else:
+    length_adder = 1
+    
+  if my_board.my_snake.health < 50 or len(my_board.my_snake.body) <= len(my_board.opp_snake.body) + length_adder:
     need_food = True
     snake_length_modifer = (len(my_board.my_snake.eaten_food) + 1)
   else:
