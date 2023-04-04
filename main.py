@@ -71,8 +71,8 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     #print("Head Actual: ", game_state["you"]["head"])
     #print("Opp Head Actual: ", opp_snake.head)
-    depth = 6
-    while (t1 - t0) < .450:
+    depth = 2
+    while (t1 - t0) < .460:
         value, temp_move, out_of_time = minimax(my_board, depth, -math.inf, math.inf, True, t0)
         print(out_of_time)
         if not out_of_time:
@@ -85,7 +85,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
       if len(safe_moves) == 0:
         print(f"MOVE {game_state['turn']}: No safe moves detected! Moving down")
         return {"move": "down"}
-        best_move = random.choice(safe_moves)
+      best_move = random.choice(safe_moves)
 
     print(f"MOVE {game_state['turn']}: {best_move}\n")
     t1 = time.perf_counter()

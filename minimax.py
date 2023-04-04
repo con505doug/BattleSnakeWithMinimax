@@ -109,7 +109,7 @@ def eval_function(my_board):
 def minimax(my_board, depth, alpha, beta, maximizing_player, t0):
   t1 = time.perf_counter()
   total_time = t1 - t0
-  if total_time > .450:
+  if total_time > .460:
     depth = 0
     my_board.out_of_time = True
 
