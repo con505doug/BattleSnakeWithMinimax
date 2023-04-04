@@ -8,3 +8,4 @@ class board:
     self.eaten_food = []
     self.moves = ["up", "down", "left", "right"]
     self.is_over = False
+    self.out_of_time = False
