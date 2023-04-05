@@ -93,6 +93,9 @@ def eval_function(my_board):
 
   if ((width_edge == 0 or height_edge == 0) or (len(opp_moves) == 1)) and enemy_close:
     trap_modifier = 100 / enemy_distance
+    if my_board.my_snake.health > 20:
+      food_weight = 0
+      snake_length_modifer = 1
 
   closest_food, food_distance = my_board.my_snake.get_closest_food(my_board.food)
   if closest_food == None:
@@ -111,7 +114,7 @@ def eval_function(my_board):
 def minimax(my_board, depth, alpha, beta, maximizing_player, t0):
   t1 = time.perf_counter()
   total_time = t1 - t0
-  if total_time > .460:
+  if total_time > .450:
     depth = 0
     my_board.out_of_time = True
 
