@@ -86,7 +86,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
         return {"move": "down"}
       best_move = random.choice(safe_moves)
 
-    print(f"MOVE {game_state['turn']}: {best_move}\n")
+    print(f"MOVE {game_state['turn']}: {best_move}")
     t1 = time.perf_counter()
     elapsed = t1 - t0
     #print(elapsed)
