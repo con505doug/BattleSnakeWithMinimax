@@ -75,6 +75,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     depth = 2
     while (t1 - t0) < .450:
         value, temp_move, out_of_time = minimax(my_board, depth, -math.inf, math.inf, True, t0)
+        print(temp_move)
         if not out_of_time:
             depth = depth + 4
             best_move = temp_move
@@ -85,6 +86,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
       if len(safe_moves) == 0:
         print(f"MOVE {game_state['turn']}: No safe moves detected! Moving down")
         return {"move": "down"}
+      print("error")
       best_move = random.choice(safe_moves)
 
     print(f"MOVE {game_state['turn']}: {best_move}")
