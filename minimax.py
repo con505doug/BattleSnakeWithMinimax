@@ -37,6 +37,7 @@ def eval_function(my_board):
     enemy_close = True
     avoid_edges = True
 
+
   if len(my_board.my_snake.body) <= 10:
     length_adder = 3
   elif len(my_board.my_snake.body) <= 20:
@@ -76,6 +77,8 @@ def eval_function(my_board):
   my_height_edge = min(bottom_wall_dist, top_wall_dist)
 
   edge_score = my_width_edge + my_height_edge
+  if edge_score == 0:
+    edge_score = -1
 
   left_wall_dist = my_board.opp_snake.head['x']
   right_wall_dist = my_board.width - my_board.opp_snake.head['x']  - 1
