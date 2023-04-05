@@ -133,10 +133,10 @@ def minimax(my_board, depth, alpha, beta, maximizing_player, t0):
         best_move = move
 
     for move, move_coords in zip(my_moves, my_move_coords):
-      #future_board = my_board
+      future_board = my_board
       #future_board = copy.deepcopy(my_board)
       #future_board = board.board(my_board.height, my_board.width, snake.snake(my_board.my_snake.head.copy(), my_board.my_snake.body.copy(), my_board.my_snake.health, my_board.my_snake.length, my_board.my_snake.eaten_food.copy()), snake.snake(my_board.opp_snake.head.copy(), my_board.opp_snake.body.copy(), my_board.opp_snake.health, my_board.opp_snake.length, my_board.opp_snake.eaten_food.copy()), my_board.food.copy(), my_board.eaten_food.copy())
-      future_board = board.board(my_board.height, my_board.width, copy.deepcopy(my_board.my_snake) , copy.deepcopy(my_board.opp_snake), my_board.food.copy(), my_board.eaten_food.copy())
+      #future_board = board.board(my_board.height, my_board.width, copy.deepcopy(my_board.my_snake) , copy.deepcopy(my_board.opp_snake), my_board.food.copy(), my_board.eaten_food.copy())
       #print("in max: ", move_coords)
       #print("in max: ", move_coords)copy.deepcopy(my_board.my_snake)
       #print(my_board.food)
@@ -158,11 +158,11 @@ def minimax(my_board, depth, alpha, beta, maximizing_player, t0):
         value = new_value
         best_move = move
 
-      '''future_board.my_snake.undo_move()
+      future_board.my_snake.undo_move()
       if ate_food == move_coords:
         future_board.food.append(move_coords)
         future_board.eaten_food.remove(move_coords)
-        future_board.my_snake.eaten_food.remove(move_coords)'''
+        future_board.my_snake.eaten_food.remove(move_coords)
 
       alpha = max(alpha, value)
       if alpha >= beta:
@@ -189,10 +189,10 @@ def minimax(my_board, depth, alpha, beta, maximizing_player, t0):
 
 
     for move, move_coords in zip(opp_moves, opp_move_coords):
-      #future_board = my_board
+      future_board = my_board
       #future_board = copy.deepcopy(my_board)
       #future_board = board.board(my_board.height, my_board.width, snake.snake(my_board.my_snake.head.copy(), my_board.my_snake.body.copy(), my_board.my_snake.health, my_board.my_snake.length, my_board.my_snake.eaten_food.copy()), snake.snake(my_board.opp_snake.head.copy(), my_board.opp_snake.body.copy(), my_board.opp_snake.health, my_board.opp_snake.length, my_board.opp_snake.eaten_food.copy()), my_board.food.copy(), my_board.eaten_food.copy())
-      future_board = board.board(my_board.height, my_board.width, copy.deepcopy(my_board.my_snake) , copy.deepcopy(my_board.opp_snake), my_board.food.copy(), my_board.eaten_food.copy())
+      #future_board = board.board(my_board.height, my_board.width, copy.deepcopy(my_board.my_snake) , copy.deepcopy(my_board.opp_snake), my_board.food.copy(), my_board.eaten_food.copy())
       #print("in max: ", move_coords)
       if move_coords in my_board.food:
         ate_food = move_coords
@@ -214,11 +214,11 @@ def minimax(my_board, depth, alpha, beta, maximizing_player, t0):
         value = new_value
         best_move = move
       
-      '''future_board.opp_snake.undo_move()
+      future_board.opp_snake.undo_move()
       if ate_food == move_coords:
         future_board.food.append(move_coords)
         future_board.eaten_food.remove(move_coords)
-        future_board.opp_snake.eaten_food.remove(move_coords)'''
+        future_board.opp_snake.eaten_food.remove(move_coords)
 
       beta = min(beta, value)
       if alpha >= beta:
