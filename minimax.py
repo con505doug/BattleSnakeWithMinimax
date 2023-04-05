@@ -88,7 +88,7 @@ def eval_function(my_board):
   if (width_edge == my_width_edge - 1 or height_edge == my_height_edge - 1) and enemy_close:
     safety_weight = safety_weight + 100
 
-  if (width_edge == 0 or height_edge == 0) and enemy_close:
+  if ((width_edge == 0 or height_edge == 0) or (len(opp_moves) == 1)) and enemy_close:
     trap_modifier = 100 / enemy_distance
 
   closest_food, food_distance = my_board.my_snake.get_closest_food(my_board.food)
@@ -97,10 +97,9 @@ def eval_function(my_board):
   elif my_board.my_snake.head == closest_food:
     food_distance = .5
     
-  
 
   #print("Food eaten: " , len(my_board.my_snake.eaten_food))
-  score = snake_length_modifer * (len(my_moves) * safety_weight + (3 / food_distance) * food_weight + (3 / enemy_distance) * attack_weight + safety_weight * edge_score + attack_weight * trap_modifier)
+  score = snake_length_modifer * ((len(my_moves) * safety_weight) * 2 + (3 / food_distance) * food_weight + (3 / enemy_distance) * attack_weight + safety_weight * edge_score + attack_weight * trap_modifier)
   #print("Food: ", food_distance)
   #print(score)
 
