@@ -74,7 +74,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
     depth = 2
     while (t1 - t0) < .460:
         value, temp_move, out_of_time = minimax(my_board, depth, -math.inf, math.inf, True, t0)
-        print(out_of_time)
         if not out_of_time:
             depth = depth + 4
             best_move = temp_move
