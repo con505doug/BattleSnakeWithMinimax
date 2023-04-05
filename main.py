@@ -89,7 +89,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     print(f"MOVE {game_state['turn']}: {best_move}\n")
     t1 = time.perf_counter()
     elapsed = t1 - t0
-    print(elapsed)
+    #print(elapsed)
     return {"move": best_move}
 
 
